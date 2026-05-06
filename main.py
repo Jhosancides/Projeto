@@ -1,42 +1,10 @@
-#importar bliblioteca
-#serve para conectar o banco de dados ao python
-
 import mysql.connector
 
-#Executa uma função da lib que realiza a conexão
-conexao = mysql.connector.connect(
+from conexao import conectar
+from cadastro_agendamento import inserir_agendamento
+from listar_agendamentos import listar_agendamentos
 
-#Parametros de conexão ao banco de dados
- 
-    host = "localhost",
-    user = "root",
-    password = "",
-    database = "oficina"
-)
+conectar()
+inserir_agendamento()
+listar_agendamentos()
 
-print("conectado")
-
-#Função cursor () da lib
-#Serve para manipular os dados de envio para o banco
-cursor = conexao.cursor()
-
-#Comandos e valores para envio de dados em SQL
-
-sql = "INSERT INTO agendamento(data_hora, motivo) VALUES(%s, %s)"
-values = ("2026/04/20", "Teste")
-
-
-cursor.execute(sql, values)
-conexao.commit()
-
-
-#(criar função)
-cursor.execute("SELECT * FROM agendamento")
-resultado = cursor.fetchall()
-
-
-for i in resultado:
-    print(i)
-#(CRIAR FUNÇÃO)
-
-#(cRIAR MODULARIZAÇÃO)
